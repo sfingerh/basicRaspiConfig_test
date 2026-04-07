@@ -57,7 +57,6 @@ Crear carpeta de fotos y asignar permisos
   ```bash
   sudo usermod -aG gpio,spi,i2c sqc
   ```
-  Reiniciar la Raspberry para aplicar los grupos.
 
 ## 8. Instalar AccessPopup
   La instalación se realiza de forma simple siguiendo las instrucciones del repo oficial (https://github.com/RaspberryConnect/AccessPopup)
@@ -72,7 +71,7 @@ Una vez instalado, AccessPopup se encarga de:
   3. Intenta reconectar si encuentra una red conocida
 
 ## 9.Configurar servicio SQC
-  Copiar archivo de servicio:
+  Copiar archivo de configuracion y habilitar servicio SQC:
   ```bash
   sudo cp /home/sqc/sqc-main/deploy/sqc.service /etc/systemd/system/sqc.service
   sudo systemctl daemon-reload
@@ -82,7 +81,7 @@ Una vez instalado, AccessPopup se encarga de:
   ```
 
 ## 10.Configurar nginx
-  Copiar configuración:
+  Copiar configuración y arrancar nginx:
   ```bash
   sudo cp /home/sqc/sqc-main/deploy/nginx-sqc.conf /etc/nginx/sites-available/sqc
   sudo ln -sf /etc/nginx/sites-available/sqc /etc/nginx/sites-enabled/sqc
@@ -90,6 +89,8 @@ Una vez instalado, AccessPopup se encarga de:
   sudo nginx -t
   sudo systemctl restart nginx
   ```
+
+Reiniciar la Raspberry para aplicar los cambios.
 
  
 
