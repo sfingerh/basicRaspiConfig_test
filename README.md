@@ -58,7 +58,7 @@ Cuando el equipo enciende:
     
 ## 4. Flujo de instalación
   La guía completa está en:
-  - `docs/02_instalacion_desde_cero.md`
+  - `docs/01_instalacion_desde_cero.md`
 
   
   
