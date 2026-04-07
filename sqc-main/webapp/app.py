@@ -18,8 +18,8 @@ from PIL import Image, ImageDraw, ImageFont
 
 app = Flask(__name__)
 
-# === Rutas (según tu proyecto) ===
-BASE_DIR = "/home/qwid94/sqc-main"
+# === Rutas ===
+BASE_DIR = "/home/sqc/sqc-main"
 PHOTO_FOLDER = f"{BASE_DIR}/fotos"
 
 # === Estado global ===
