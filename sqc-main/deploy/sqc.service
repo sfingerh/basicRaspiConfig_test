@@ -1,0 +1,14 @@
+[Unit]
+Description=SQC Flask Web App
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+User=qwid94
+WorkingDirectory=/home/qwid94/sqc-main/webapp
+ExecStart=/home/qwid94/sqc-main/webapp/.venv/bin/python /home/qwid94/sqc-main/webapp/app.py
+Restart=always
+RestartSec=2
+
+[Install]
+WantedBy=multi-user.target
