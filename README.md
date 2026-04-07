@@ -38,23 +38,23 @@ Cuando el equipo enciende:
 
 ## 3. Funcionalidades implementadas
   ### Interfaz web
-    La aplicación Flask entrega una página web simple para controlar el sistema.
+  - La aplicación Flask entrega una página web simple para controlar el sistema.
   ### Captura manual
-    Permite disparar una fotografía desde la web.
+  - Permite disparar una fotografía desde la web.
   ### Modo automático
-    Permite definir un intervalo en minutos para capturar fotos automáticamente.
+  - Permite definir un intervalo en minutos para capturar fotos automáticamente.
   ### Tiempo de exposición
-    El usuario puede fijar el tiempo de exposición en segundos. 
+  - El usuario puede fijar el tiempo de exposición en segundos. 
   ### Modo “Solo Noche”
-    Si esta opción está activa, el sistema bloquea fotografías durante el día según la ventana horaria definida en el código.
+  - Si esta opción está activa, el sistema bloquea fotografías durante el día según la ventana horaria definida en el código.
   ### Visualización de la última foto
-    La web muestra la última imagen disponible en la carpeta de fotos.
+  - La web muestra la última imagen disponible en la carpeta de fotos.
   ### LED RGB y display
-    El equipo comunica estados locales del sistema mediante hardware conectado a la Raspberry.
+  - El equipo comunica estados locales del sistema mediante hardware conectado a la Raspberry.
   ### Arranque automático
-    La aplicación queda configurada como servicio `systemd`, por lo que inicia automáticamente al encender la Raspberry.
+  - La aplicación queda configurada como servicio `systemd`, por lo que inicia automáticamente al encender la Raspberry.
   ### Acceso de red
-    La gestión de reconexión WiFi y modo AP fue delegada a AccessPopup.
+  - La gestión de reconexión WiFi y modo AP fue delegada a AccessPopup.
     
 ## 4. Flujo de instalación
   La guía completa está en:
