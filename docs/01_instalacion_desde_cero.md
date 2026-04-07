@@ -27,19 +27,21 @@ Esta guía describe cómo montar el sistema desde cero.
 
 ## 4. Crear estructura de carpetas
   ```bash
-  mkdir -p /home/sqc/sqc-main/webapp/templates
-  mkdir -p /home/sqc/sqc-main/webapp/static
+  mkdir -p /home/sqc/sqc-main
+  ```
+Copiar todo el contenido de 
+  - SQC/sqc-main/
+    
+en:
+  - /home/sqc/sqc-main/
+    
+Crear carpeta de fotos y asignar permisos
+  ```bash
   mkdir -p /home/sqc/sqc-main/fotos
   sudo chown -R sqc:sqc /home/sqc/sqc-main
   chmod -R 755 /home/sqc/sqc-main/fotos
   ```
-
-## 4.Copiar archivos del proyecto
-  Copiar todo el contenido de 
-    - SQC/sqc-main/
-  en:
-    - /home/sqc/sqc-main/  
-
+    
 ## 6. Crear entorno virtual
   ```bash
   cd /home/sqc/sqc-main/webapp
@@ -60,7 +62,7 @@ Esta guía describe cómo montar el sistema desde cero.
 ## 8. Instalar AccessPopup
   La instalación se realiza de forma simple siguiendo las instrucciones del repo oficial (https://github.com/RaspberryConnect/AccessPopup)
   ```bash
-  cd /home/sqc/sqc-main/webapp/AccessPopup
+  cd /home/sqc/sqc-main/deploy/AccessPopup
   sudo chmod +x ./installconfig.sh
   sudo ./installconfig.sh
   ```
