@@ -4,9 +4,9 @@ After=network-online.target
 Wants=network-online.target
 
 [Service]
-User=qwid94
-WorkingDirectory=/home/qwid94/sqc-main/webapp
-ExecStart=/home/qwid94/sqc-main/webapp/.venv/bin/python /home/qwid94/sqc-main/webapp/app.py
+User=sqc
+WorkingDirectory=/home/sqc/sqc-main/webapp
+ExecStart=/home/sqc/sqc-main/webapp/.venv/bin/python /home/sqc/sqc-main/webapp/app.py
 Restart=always
 RestartSec=2
 
