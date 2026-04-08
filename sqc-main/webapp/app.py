@@ -12,14 +12,14 @@ import RPi.GPIO as GPIO
 import requests
 from flask import Flask, jsonify, render_template, request, send_from_directory
 
-from luma.core.interface.serial import spi
-from luma.lcd.device import st7789
+from luma.core.interface.serial import i2c
+from luma.oled.device import ssd1306
 from PIL import Image, ImageDraw, ImageFont
 
 app = Flask(__name__)
 
-# === Rutas ===
-BASE_DIR = "/home/sqc/sqc-main"
+# === Rutas (según tu proyecto) ===
+BASE_DIR = "/home/qwid94/sqc-main"
 PHOTO_FOLDER = f"{BASE_DIR}/fotos"
 
 # === Estado global ===
@@ -44,9 +44,11 @@ now_pre3 = 0
 MSG_LOCK = threading.Lock()
 MSG_QUEUE = deque(maxlen=200)  # mensajes pendientes para el browser
 
+
 def push_msg(msg: str) -> None:
     with MSG_LOCK:
         MSG_QUEUE.append(f"{datetime.now().strftime('%H:%M:%S')} | {msg}")
+
 
 def pop_msg() -> str:
     with MSG_LOCK:
@@ -55,9 +57,13 @@ def pop_msg() -> str:
     return ""
 
 
-# === Display ST7789 (según tu app original) ===
-serial = spi(port=0, device=0, gpio_DC=25, gpio_RST=24, bus_speed_hz=8000000)
-device = st7789(serial, width=280, height=190, rotate=0, h_offset=0, v_offset=0)
+# === Display OLED I2C 0.96" ===
+# OJO:
+# - Muchos módulos indican 0x78 impreso, pero en Python/luma normalmente se usa 0x3C.
+# - Si no responde, revisar con: i2cdetect -y 1
+# - Si aparece 3d, cambiar address=0x3D
+serial = i2c(port=1, address=0x3C)
+device = ssd1306(serial, width=128, height=64, rotate=0)
 
 
 def get_latest_photo() -> str | None:
@@ -192,12 +198,14 @@ def background_task():
     GPIO.setup(LED_R, GPIO.OUT)
     GPIO.setup(LED_G, GPIO.OUT)
 
-    # En tu lógica original: HIGH parece "apagado" (cableado tipo common-anode / active-low)
+    # Lógica active-low:
+    # HIGH = apagado
+    # LOW = encendido
     GPIO.output(LED_B, GPIO.HIGH)
     GPIO.output(LED_R, GPIO.HIGH)
     GPIO.output(LED_G, GPIO.HIGH)
 
-    txt = "Iniciando sistema..."
+    txt = "Iniciando..."
     texto_medio(device, txt)
     LED_P = False
     LED_def = LED_R
@@ -252,27 +260,26 @@ def background_task():
 
             if cambio:
                 cambio = False
-                txt1 = f"WIFI: {ssid}"
-                txt2 = f"IP: {ip}"
-                txt3 = f"SYS: {txt}"
+                txt1 = f"WIFI:{ssid}"
+                txt2 = f"IP:{ip}"
+                txt3 = f"SYS:{txt}"
                 texto_act(device, txt1, txt2, txt3)
                 time.sleep(1.5)
                 txt = "OK"
-                texto_act(device, f"WIFI: {ssid}", f"IP: {ip}", f"SYS: {txt}")
+                texto_act(device, f"WIFI:{ssid}", f"IP:{ip}", f"SYS:{txt}")
 
         now3 = millis()
         if auto and t > 0 and (now3 - now_pre3) >= t:
             name = Foto()
             msg = f"Foto: {name}"
             now_pre3 = now3
-            push_msg(msg)   # queda disponible para el browser
+            push_msg(msg)
 
         now4 = millis()
         if (now4 - now_pre4) >= 10000:
             now_pre4 = now4
             ssid, ip = CheqRed()
 
-            # Lógica original de estados
             if ssid == "WiFi-not":
                 if ip == "192.168.50.5":
                     GPIO.output(LED_def, GPIO.HIGH)
@@ -303,21 +310,34 @@ def LED_act(pin, state):
     GPIO.output(pin, state)
 
 
+def get_font():
+    try:
+        return ImageFont.load_default()
+    except Exception:
+        return None
+
+
 def texto_medio(device, txt1):
-    image = Image.new("RGB", (device.width, device.height), "black")
+    image = Image.new("1", (device.width, device.height), 0)
     draw = ImageDraw.Draw(image)
-    font = ImageFont.truetype("/usr/share/fonts/truetype/msttcorefonts/arial.ttf", 25)
-    draw.text((50, 105), txt1, fill="white", font=font)
+    font = get_font()
+
+    txt1 = str(txt1)[:20]
+    x = 8
+    y = 28
+    draw.text((x, y), txt1, fill=255, font=font)
     device.display(image)
 
 
 def texto_act(device, txt1, txt2, txt3):
-    image = Image.new("RGB", (device.width, device.height), "black")
+    image = Image.new("1", (device.width, device.height), 0)
     draw = ImageDraw.Draw(image)
-    font = ImageFont.truetype("/usr/share/fonts/truetype/msttcorefonts/arial.ttf", 25)
-    draw.text((45, 65), txt1, fill="white", font=font)
-    draw.text((45, 107), txt2, fill="white", font=font)
-    draw.text((45, 150), txt3, fill="white", font=font)
+    font = get_font()
+
+    # Máximo aprox 21 caracteres por línea con la fuente por defecto
+    draw.text((0, 0),  str(txt1)[:21], fill=255, font=font)
+    draw.text((0, 20), str(txt2)[:21], fill=255, font=font)
+    draw.text((0, 40), str(txt3)[:21], fill=255, font=font)
     device.display(image)
 
 
@@ -352,7 +372,7 @@ def Foto():
     # OJO: CR2 no se ve en navegador. Si quieres vista web, guarda JPG o preview.
     filename = os.path.join(PHOTO_FOLDER, f"{stamp}.cr2")
 
-    # Disparo / descarga (como tu lógica original)
+    # Disparo / descarga
     os.system('gphoto2 --set-config eosremoterelease=Immediate')
     os.system(f"sleep {int(t_exp)}")
     os.system('gphoto2 --set-config eosremoterelease="Release Full"')
