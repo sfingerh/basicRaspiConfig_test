@@ -147,9 +147,10 @@ Crear carpeta de fotos y asignar permisos
   Pruebe el sistema usando la opcion 4. Acceda a la red SQC-AP con la ip 192.168.50.5
   
   Una vez instalado, AccessPopup se encarga de:
-    1. intentar conectarse a redes conocidas
-    2. habilitar modo Access Point si no encuentra una red usable
-    3. Intenta reconectar si encuentra una red conocida
+  
+  1. intentar conectarse a redes conocidas
+  2. habilitar modo Access Point si no encuentra una red usable
+  3. Intenta reconectar si encuentra una red conocida
   
 ## 9.Configurar servicio SQC
   Copiar archivo de configuracion y habilitar servicio SQC:
