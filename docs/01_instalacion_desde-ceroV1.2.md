@@ -145,6 +145,7 @@ Crear carpeta de fotos y asignar permisos
   <img width="661" height="418" alt="imagen" src="https://github.com/user-attachments/assets/50f7496c-cb1a-4848-8564-7e9af493a5af" />
   
   Pruebe el sistema usando la opcion 4. Acceda a la red SQC-AP con la ip 192.168.50.5
+  
   Una vez instalado, AccessPopup se encarga de:
     1. intentar conectarse a redes conocidas
     2. habilitar modo Access Point si no encuentra una red usable
