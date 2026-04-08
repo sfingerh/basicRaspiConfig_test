@@ -15,8 +15,7 @@ Esta guía describe cómo montar el sistema desde cero.
   sudo raspi-config
   ```
   Habilitar I2C
-  
-    <img width="661" height="418" alt="imagen" src="https://github.com/user-attachments/assets/68a9e5b0-c161-4b4a-a834-ba5a4c475339" />
+  <img width="661" height="418" alt="imagen" src="https://github.com/user-attachments/assets/68a9e5b0-c161-4b4a-a834-ba5a4c475339" />
 
 ## 3.Instalar paquetes del sistema
   ```bash
