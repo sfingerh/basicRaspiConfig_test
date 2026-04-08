@@ -78,7 +78,11 @@ Crear carpeta de fotos y asignar permisos
   cd /home/qwid94/sqc-main/webapp
   python3 -m venv .venv
   source .venv/bin/activate
+  ```
+  ```bash
   pip install --upgrade pip wheel setuptools
+  ```
+  ```bash
   pip install \
   blinker \
   cbor2 \
@@ -99,6 +103,8 @@ Crear carpeta de fotos y asignar permisos
   smbus2 \
   urllib3 \
   Werkzeug
+  ```
+  ```bash
   deactivate
   ```
 
@@ -161,7 +167,15 @@ Reiniciar la Raspberry para aplicar los cambios.
   ```bash
   sudo reboot
   ```
+## 10.Pruebas finales
+  Active el entorno virtual y ejecute app.py manualmente. Deben estar conectador Display, RGB y camara para q el sistema arranque.
+  ```bash
+  cd /home/sqc/sqc-main/webapp
+  source .venv/bin/activate
+  python app.py
+  ```
+  <img width="661" height="418" alt="imagen" src="https://github.com/user-attachments/assets/e0c39783-fe17-4d06-b8b7-e2b63fe569a5" />
+  Ingrese desde el navegador web a la direccion sqc.local o a la direccion IP que muestra en el display.
+  <img width="820" height="905" alt="imagen" src="https://github.com/user-attachments/assets/8dc0e923-3a11-4d96-a32e-3317704a0097" />
 
- 
-
-
+  
