@@ -15,7 +15,7 @@ Esta guía describe cómo montar el sistema desde cero.
   sudo raspi-config
   ```
   Habilitar I2C
-    <img width="661" height="418" alt="imagen" src="https://github.com/user-attachments/assets/2f196936-e245-4380-88bc-52c8255dac8f" />
+    <img width="661" height="418" alt="imagen" src="https://github.com/user-attachments/assets/68a9e5b0-c161-4b4a-a834-ba5a4c475339" />
 
 ## 3.Instalar paquetes del sistema
   ```bash
@@ -151,6 +151,7 @@ Crear carpeta de fotos y asignar permisos
   sudo systemctl enable sqc
   sudo systemctl start sqc
   sudo systemctl status sqc --no-pager
+  sudo systemctl stop sqc
   ```
 
 ## 10.Configurar nginx
@@ -168,7 +169,7 @@ Reiniciar la Raspberry para aplicar los cambios.
   sudo reboot
   ```
 ## 10.Pruebas finales
-  Active el entorno virtual y ejecute app.py manualmente. Deben estar conectador Display, RGB y camara para q el sistema arranque.
+  Active el entorno virtual y ejecute app.py manualmente. Deben estar conectado Display, RGB y camara para q el sistema arranque.
   ```bash
   cd /home/sqc/sqc-main/webapp
   source .venv/bin/activate
