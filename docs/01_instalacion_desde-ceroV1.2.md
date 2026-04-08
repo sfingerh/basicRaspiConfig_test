@@ -133,11 +133,17 @@ Crear carpeta de fotos y asignar permisos
   sudo ./installconfig.sh
   ```
   Seleccione opcion 1
+  
   <img width="661" height="418" alt="imagen" src="https://github.com/user-attachments/assets/05713557-ed55-47a1-8f8f-a07a1b6524c5" />
+  
   finalizara con este mensaje:
+  
   <img width="661" height="418" alt="imagen" src="https://github.com/user-attachments/assets/8954c9b6-3fce-41bf-ac56-3dd8f6f13ab1" />
+  
   luego con la opcion 2 cambie el SSID y password del wifi AP.
+  
   <img width="661" height="418" alt="imagen" src="https://github.com/user-attachments/assets/50f7496c-cb1a-4848-8564-7e9af493a5af" />
+  
   Pruebe el sistema usando la opcion 4. Acceda a la red SQC-AP con la ip 192.168.50.5
   Una vez instalado, AccessPopup se encarga de:
     1. intentar conectarse a redes conocidas
