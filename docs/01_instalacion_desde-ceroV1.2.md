@@ -126,14 +126,10 @@ Crear carpeta de fotos y asignar permisos
   3. Intenta reconectar si encuentra una red conocida
   
 ## 9.Configurar servicio SQC
-  Copiar archivo de configuracion y habilitar servicio SQC:
+  Copiar archivo de configuracion del servicio SQC:
   ```bash
   sudo cp /home/sqc/sqc-main/deploy/sqc.service /etc/systemd/system/sqc.service
   sudo systemctl daemon-reload
-  sudo systemctl enable sqc
-  sudo systemctl start sqc
-  sudo systemctl status sqc --no-pager
-  sudo systemctl stop sqc
   ```
 
 ## 10.Configurar nginx
@@ -162,5 +158,14 @@ Reiniciar la Raspberry para aplicar los cambios.
   Ingrese desde el navegador web a la direccion sqc.local o a la direccion IP que muestra en el display.
   
   <img width="820" height="905" alt="imagen" src="https://github.com/user-attachments/assets/8dc0e923-3a11-4d96-a32e-3317704a0097" />
+  
+## 11.Habilitar servicio SQC
+  ```bash
+  sudo systemctl enable sqc
+  sudo systemctl start sqc
+  sudo systemctl status sqc --no-pager
+  ```
+
+  Finalmente acceda al portal web para asegurarse que todo esta correcto.
 
   
