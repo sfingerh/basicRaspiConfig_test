@@ -162,6 +162,7 @@ Reiniciar la Raspberry para aplicar los cambios.
   
 ## 11.Habilitar servicio SQC
   ```bash
+  deactivate
   sudo systemctl enable sqc
   sudo systemctl start sqc
   sudo systemctl status sqc --no-pager
