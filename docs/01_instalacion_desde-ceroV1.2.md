@@ -49,7 +49,7 @@ Crear carpeta de fotos y asignar permisos
     
 ## 5. Crear entorno virtual
   ```bash
-  cd /home/qwid94/sqc-main/webapp
+  cd /home/sqc/sqc-main/webapp
   python3 -m venv .venv
   source .venv/bin/activate
   ```
