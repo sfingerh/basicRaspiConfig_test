@@ -28,34 +28,7 @@ Esta guía describe cómo montar el sistema desde cero.
   luego de reiniciar, instalar dependencias
   ```bash
   sudo apt update
-  sudo apt install -y \
-  nginx \
-  git \
-  python3 \
-  python3-venv \
-  python3-pip \
-  python3-dev \
-  gphoto2 \
-  libexif12 \
-  libgphoto2-6 \
-  libgphoto2-port12 \
-  libltdl7 \
-  libjpeg-dev \
-  zlib1g-dev \
-  libopenjp2-7 \
-  libtiff6 \
-  libfreetype6 \
-  liblcms2-2 \
-  libwebp7 \
-  libharfbuzz0b \
-  libfribidi0 \
-  libxcb1 \
-  fonts-liberation \
-  ttf-mscorefonts-installer \
-  i2c-tools \
-  network-manager \
-  usbutils \
-  curl
+  sudo apt install -y nginx git python3 python3-venv python3-pip python3-dev gphoto2 libexif12 libgphoto2-6 libgphoto2-port12 libltdl7 libjpeg-dev zlib1g-dev libopenjp2-7 libtiff6 libfreetype6 liblcms2-2 libwebp7 libharfbuzz0b libfribidi0 libxcb1 fonts-liberation ttf-mscorefonts-installer i2c-tools network-manager usbutils curl
   ```
 
 ## 4. Crear estructura de carpetas y descargar el proyecto
