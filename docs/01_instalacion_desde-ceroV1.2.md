@@ -157,7 +157,8 @@ Reiniciar la Raspberry para aplicar los cambios.
   
   Ingrese desde el navegador web a la direccion sqc.local o a la direccion IP que muestra en el display.
   
-  <img width="820" height="905" alt="imagen" src="https://github.com/user-attachments/assets/8dc0e923-3a11-4d96-a32e-3317704a0097" />
+  <img width="820" height="910" alt="imagen" src="https://github.com/user-attachments/assets/a84e3db7-b5fe-49e1-a98f-881491d5b30f" />
+
   
 ## 11.Habilitar servicio SQC
   ```bash
