@@ -124,15 +124,24 @@ Crear carpeta de fotos y asignar permisos
   1. intentar conectarse a redes conocidas
   2. habilitar modo Access Point si no encuentra una red usable
   3. Intenta reconectar si encuentra una red conocida
-  
-## 9.Configurar servicio SQC
-  Copiar archivo de configuracion del servicio SQC:
+
+## 9. Crear sudoers para comandos
+  ```bash
+  sudo visudo -f /etc/sudoers.d/sqc-webapp
+  ```
+  Agregue lo siguiente y guarde los cambios en el archivo:
+  ```bash
+  sqc ALL=(root) NOPASSWD: /usr/local/bin/accesspopup, /usr/local/bin/accesspopup -a, /usr/sbin/reboot, /usr/sbin/shutdown -h now
+  ```
+
+## 10.Configurar servicio SQC
+  Copiar archivo de configuracion del servicio SQC y recargar servicios:
   ```bash
   sudo cp /home/sqc/sqc-main/deploy/sqc.service /etc/systemd/system/sqc.service
   sudo systemctl daemon-reload
   ```
 
-## 10.Configurar nginx
+## 11.Configurar nginx
   Copiar configuración y arrancar nginx:
   ```bash
   sudo cp /home/sqc/sqc-main/deploy/nginx-sqc.conf /etc/nginx/sites-available/sqc
@@ -146,7 +155,7 @@ Reiniciar la Raspberry para aplicar los cambios.
   ```bash
   sudo reboot
   ```
-## 10.Pruebas finales
+## 12.Pruebas finales
   Active el entorno virtual y ejecute app.py manualmente. Deben estar conectado Display, RGB y camara para q el sistema arranque.
   ```bash
   cd /home/sqc/sqc-main/webapp
@@ -160,7 +169,7 @@ Reiniciar la Raspberry para aplicar los cambios.
   <img width="820" height="910" alt="imagen" src="https://github.com/user-attachments/assets/a84e3db7-b5fe-49e1-a98f-881491d5b30f" />
 
   
-## 11.Habilitar servicio SQC
+## 13.Habilitar servicio SQC
   ```bash
   deactivate
   sudo systemctl enable sqc
