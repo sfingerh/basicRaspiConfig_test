@@ -961,7 +961,7 @@ def update_settings():
     if not parts:
         msg = "Configuracion sin cambios"
     else:
-        msg = "Configuracion actualizada | " + " | ".join(parts)
+        msg = parts
 
     set_status(msg, notify_web=True, wake_outputs=True, transient_s=3.0, error_state=False)
     return jsonify(
