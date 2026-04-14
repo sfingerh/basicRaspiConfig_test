@@ -129,7 +129,7 @@
         <input type="number" id="exposureTime" min="1" max="1000" value="10">
 
         <label for="nightMode">Solo Noche</label>
-        <input type="checkbox" id="nightMode">
+        <input type="checkbox" id="nightMode" onchange="syncSettings()">
 
         <button onclick="sendActionWithTime('Button 1', document.getElementById('timeInput').value, document.getElementById('exposureTime').value, document.getElementById('nightMode').checked)">Foto</button>
         <button onclick="sendActionWithTime('Button 2', document.getElementById('timeInput').value, document.getElementById('exposureTime').value, document.getElementById('nightMode').checked)">Iniciar</button>
@@ -149,6 +149,30 @@
     <script>
         function toggleDarkMode() {
             document.body.classList.toggle('dark-mode');
+        }
+
+
+        function syncSettings() {
+            const data = {
+                time: document.getElementById('timeInput').value,
+                exposureTime: document.getElementById('exposureTime').value,
+                nightMode: document.getElementById('nightMode').checked
+            };
+
+            fetch('/settings', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => {
+                const consoleElement = document.getElementById('console');
+                if (data.message) {
+                    consoleElement.value += data.message + '\n';
+                    consoleElement.scrollTop = consoleElement.scrollHeight;
+                }
+            })
+            .catch(error => console.error('Error al actualizar la configuración:', error));
         }
 
         function sendAction(button) {
