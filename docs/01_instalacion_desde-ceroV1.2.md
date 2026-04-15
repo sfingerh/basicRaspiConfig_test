@@ -4,7 +4,9 @@ Esta guía describe cómo montar el sistema desde cero.
 ## 1. Supuestos
   Se asume:
   - Raspberry Pi Zero 2 W con Debian Trixie o superior, sin entorno de escritorio.
-    <img width="676" height="476" alt="imagen" src="https://github.com/user-attachments/assets/c3a83cf4-9124-4f72-8173-945c96ec8969" />
+    <p align="center">
+      <img width="676" height="476" alt="imagen" src="https://github.com/user-attachments/assets/c3a83cf4-9124-4f72-8173-945c96ec8969" />
+    <p
   - usuario del sistema: `sqc`
   - proyecto ubicado en `/home/sqc/sqc-main`
   - conexión a internet disponible al menos durante la instalación inicial
@@ -15,8 +17,9 @@ Esta guía describe cómo montar el sistema desde cero.
   sudo raspi-config
   ```
   Habilitar I2C
-  
-  <img width="661" height="418" alt="imagen" src="https://github.com/user-attachments/assets/68a9e5b0-c161-4b4a-a834-ba5a4c475339" />
+  <p align="center">
+    <img width="661" height="418" alt="imagen" src="https://github.com/user-attachments/assets/68a9e5b0-c161-4b4a-a834-ba5a4c475339" />
+  <p
 
 ## 3.Instalar paquetes del sistema
   ```bash
@@ -106,16 +109,22 @@ Crear carpeta de fotos y asignar permisos
   sudo ./installconfig.sh
   ```
   Seleccione opcion 1
-  
-  <img width="661" height="418" alt="imagen" src="https://github.com/user-attachments/assets/05713557-ed55-47a1-8f8f-a07a1b6524c5" />
-  
+
+  <p align="center">
+    <img width="661" height="418" alt="imagen" src="https://github.com/user-attachments/assets/05713557-ed55-47a1-8f8f-a07a1b6524c5" />
+  <p
+    
   finalizara con este mensaje:
-  
-  <img width="661" height="418" alt="imagen" src="https://github.com/user-attachments/assets/8954c9b6-3fce-41bf-ac56-3dd8f6f13ab1" />
+
+  <p align="center">
+    <img width="661" height="418" alt="imagen" src="https://github.com/user-attachments/assets/8954c9b6-3fce-41bf-ac56-3dd8f6f13ab1" />
+  <p
   
   luego con la opcion 2 cambie el SSID y password del wifi AP.
-  
-  <img width="661" height="418" alt="imagen" src="https://github.com/user-attachments/assets/50f7496c-cb1a-4848-8564-7e9af493a5af" />
+
+  <p align="center">
+    <img width="661" height="418" alt="imagen" src="https://github.com/user-attachments/assets/50f7496c-cb1a-4848-8564-7e9af493a5af" />
+  <p
   
   Pruebe el sistema usando la opcion 4. Acceda a la red SQC-AP con la ip 192.168.50.5
   
@@ -162,11 +171,15 @@ Reiniciar la Raspberry para aplicar los cambios.
   source .venv/bin/activate
   python app.py
   ```
-  <img width="661" height="418" alt="imagen" src="https://github.com/user-attachments/assets/e0c39783-fe17-4d06-b8b7-e2b63fe569a5" />
+  <p align="center">
+    <img width="661" height="418" alt="imagen" src="https://github.com/user-attachments/assets/e0c39783-fe17-4d06-b8b7-e2b63fe569a5" />
+  <p
   
   Ingrese desde el navegador web a la direccion sqc.local o a la direccion IP que muestra en el display.
-  
-  <img width="820" height="910" alt="imagen" src="https://github.com/user-attachments/assets/a84e3db7-b5fe-49e1-a98f-881491d5b30f" />
+
+  <p align="center">
+    <img width="820" height="910" alt="imagen" src="https://github.com/user-attachments/assets/a84e3db7-b5fe-49e1-a98f-881491d5b30f" />
+  <p
 
   
 ## 13.Habilitar servicio SQC
