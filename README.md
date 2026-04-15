@@ -1,8 +1,8 @@
 # SQC
 Sistema portátil para captura automática de fotografías del cielo nocturno orientado a análisis de contaminación lumínica. Desarrollado por Daniel Rengifo para el laboratorio LabSens de la PUCV, Chile.
-
+<p align="center">
   <img width="525" height="534" alt="imagen" src="https://github.com/user-attachments/assets/d067a695-7ffe-4a9d-86c5-7e247ae3b2f9" />
-  
+</p>  
 El equipo fue concebido como un maletín autónomo que integra:
   - Raspberry Pi
   - Cámara Canon
