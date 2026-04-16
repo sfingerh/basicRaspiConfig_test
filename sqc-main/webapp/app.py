@@ -20,7 +20,7 @@ app = Flask(__name__)
 # ==========================================================
 # Rutas y configuración general
 # ==========================================================
-BASE_DIR = "/home/sqc/sqc-main"
+BASE_DIR = "/home/sfingerh/LabSensRasPi-main"
 WEBAPP_DIR = os.path.join(BASE_DIR, "webapp")
 PHOTO_FOLDER = os.path.join(BASE_DIR, "fotos")
 ACCESSPOPUP_LOCAL_BIN = os.path.join(WEBAPP_DIR, "AccessPopup", "accesspopup")
@@ -575,7 +575,7 @@ def check_network() -> tuple[str, str, str]:
         return ssid_now, local_ip, "WIFI"
 
     if local_ip.startswith("192.168.50."):
-        return "SQC-AP", local_ip, "AP"
+        return "NewLabSens-AP", local_ip, "AP"
 
     return "-", local_ip, "OFF"
 
