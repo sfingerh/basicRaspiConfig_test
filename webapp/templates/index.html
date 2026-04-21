@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>LabSens Hub</title>
+    <style>
+        :root { --primary: #007BFF; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+            margin: 0; padding: 0;
+            background-color: #f4f4f9; color: #222;
+            touch-action: manipulation;
+        }
+        body.dark-mode { background-color: #121212; color: #f4f4f9; }
+        .container { 
+            width: 100%; 
+            max-width: 480px; 
+            margin: 0 auto; 
+            padding: 80px 15px 20px; 
+        }
+        .oled-mirror {
+            background: #111;
+            color: #0f0;
+            padding: 18px;
+            border-radius: 12px;
+            font-family: monospace;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            min-height: 110px;
+        }
+        h1 { text-align: center; margin-bottom: 10px; }
+        h2 { margin: 25px 0 10px; text-align: center; }
+        button {
+            width: 100%;
+            padding: 18px;
+            margin: 8px 0;
+            font-size: 1.25rem;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+        }
+        button.primary { background: var(--primary); color: white; }
+        .custom-input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <button onclick="toggleDarkMode()" style="position:absolute;top:15px;right:15px;font-size:1.8rem;background:none;border:none;">🌙</button>
+
+        <h1>LabSens Hub</h1>
+
+        <!-- OLED Mirror -->
+        <div class="oled-mirror" id="oled-mirror">
+            SSID: <span id="ssid">---</span><br>
+            IP:   <span id="ip">---</span><br>
+            <span id="status">Cargando...</span>
+        </div>
+
+        <h2>OLED Control</h2>
+        <button class="primary" onclick="sendAction('oled_status')">Show Status</button>
+        <button class="primary" onclick="sendAction('oled_custom')">Custom Message</button>
+        <button onclick="sendAction('oled_off')">Turn OLED Off</button>
+        <button onclick="sendAction('oled_on')">Turn OLED On</button>
+
+        <h2>LED RGB Control</h2>
+        <button class="primary" onclick="sendAction('led_green_blink')">Green Blink</button>
+        <button class="primary" onclick="sendAction('led_blue_blink')">Blue Blink</button>
+        <button onclick="sendAction('led_red')">Red Solid</button>
+        <button onclick="sendAction('led_yellow')">Yellow Solid</button>
+        <button onclick="sendAction('led_purple')">Purple Solid</button>
+        <button onclick="sendAction('led_cyan')">Cyan Solid</button>
+        <button onclick="sendAction('led_white')">White Solid</button>
+        <button onclick="sendAction('led_off')">LED Off</button>
+
+        <h2>Custom Message</h2>
+        <input type="text" id="customMsg" class="custom-input" placeholder="Write your message here...">
+        <button class="primary" onclick="sendCustomMessage()">Send to OLED</button>
+
+        <h2>System</h2>
+        <button onclick="sendAction('Reboot')">Reboot Pi</button>
+        <button onclick="sendAction('Shutdown')">Shutdown Pi</button>
+    </div>
+
+    <script>
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+        }
+
+        function sendAction(action) {
+            fetch('/action', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ button: action })
+            });
+        }
+
+        function sendCustomMessage() {
+            const msg = document.getElementById('customMsg').value.trim();
+            if (msg) {
+                fetch('/action', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ button: 'oled_custom', message: msg })
+                });
+                document.getElementById('customMsg').value = '';
+            }
+        }
+
+        // Update OLED mirror in real time
+        function updateOLEDMirror() {
+            fetch('/status')
+                .then(r => r.json())
+                .then(data => {
+                    document.getElementById('ssid').textContent = data.ssid || '---';
+                    document.getElementById('ip').textContent = data.ip_addr || '---';
+                    document.getElementById('status').textContent = data.status || 'LabSens';
+                })
+                .catch(() => {});
+        }
+
+        setInterval(updateOLEDMirror, 800);
+        updateOLEDMirror();
+    </script>
+</body>
+</html>

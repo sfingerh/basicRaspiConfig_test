@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>LabSens - Hub Domótica</title>
+    <style>
+        :root {
+            --primary: #007BFF;
+            --danger: #FF4C4C;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f4f4f9;
+            color: #222;
+            touch-action: manipulation;
+        }
+        body.dark-mode {
+            background-color: #121212;
+            color: #f4f4f9;
+        }
+        h1, h2 {
+            margin: 8px 0;
+            text-align: center;
+        }
+        .container {
+            width: 100%;
+            max-width: 480px;
+            padding: 15px;
+            box-sizing: border-box;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        .messages-container {
+            width: 100%;
+            margin: 15px 0;
+        }
+        textarea {
+            width: 100%;
+            height: 140px;
+            font-family: monospace;
+            font-size: 1rem;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            resize: none;
+            box-sizing: border-box;
+        }
+        .controls {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 100%;
+        }
+        button {
+            padding: 18px 20px;
+            font-size: 1.25rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            min-height: 56px; /* mínimo recomendado para touch */
+            width: 100%;
+        }
+        button.primary {
+            background-color: var(--primary);
+            color: white;
+        }
+        button.danger {
+            background-color: var(--danger);
+            color: white;
+        }
+        .settings {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 15px 0;
+        }
+        .setting-item {
+            flex: 1;
+            min-width: 140px;
+        }
+        label {
+            display: block;
+            margin-bottom: 4px;
+            font-size: 1.05rem;
+        }
+        input[type="number"], input[type="checkbox"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 1.1rem;
+            border-radius: 8px;
+        }
+        .footer {
+            margin-top: auto;
+            padding: 20px 0;
+            text-align: center;
+            font-size: 0.95rem;
+            width: 100%;
+        }
+        .footer img {
+            max-width: 90px;
+            margin: 8px auto;
+        }
+        /* Media query para pantallas grandes (PC) */
+        @media (min-width: 601px) {
+            .container {
+                max-width: 600px;
+            }
+            button {
+                font-size: 1.1rem;
+                padding: 14px 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <button class="top-right" onclick="toggleDarkMode()" style="position:absolute;top:15px;right:15px;padding:10px 15px;font-size:1rem;">🌙</button>
+        
+        <h1>LabSens Hub</h1>
+
+        <div>
+            {% if photo_name %}
+                <img src="/photos/{{ photo_name }}" alt="Última Foto" id="photo">
+            {% else %}
+                <p>No hay fotos disponibles.</p>
+            {% endif %}
+        </div>
+
+        <div class="messages-container">
+            <h2>Mensajes</h2>
+            <textarea id="console" readonly></textarea>
+        </div>
+
+        <div class="settings">
+            <div class="setting-item">
+                <label for="timeInput">Tiempo Auto [min]</label>
+                <input type="number" id="timeInput" min="1" max="1000" value="5">
+            </div>
+            <div class="setting-item">
+                <label for="exposureTime">Tiempo Exposición [s]</label>
+                <input type="number" id="exposureTime" min="1" max="1000" value="10">
+            </div>
+            <div class="setting-item">
+                <label for="nightMode">Solo Noche</label>
+                <input type="checkbox" id="nightMode" onchange="syncSettings()">
+            </div>
+        </div>
+
+        <div class="controls">
+            <button class="primary" onclick="sendActionWithTime('Button 1', document.getElementById('timeInput').value, document.getElementById('exposureTime').value, document.getElementById('nightMode').checked)">📸 Foto</button>
+            <button class="primary" onclick="sendActionWithTime('Button 2', document.getElementById('timeInput').value, document.getElementById('exposureTime').value, document.getElementById('nightMode').checked)">▶️ Iniciar</button>
+            <button onclick="sendAction('Button 3')">⏹️ Detener</button>
+            <button class="danger" onclick="sendAction('Shutdown')">⏻ Apagar</button>
+            <button class="danger" onclick="sendAction('Reboot')">🔄 Reiniciar</button>
+        </div>
+
+        <div class="footer">
+            <img src="/static/logo.png" alt="Logo LabSens">
+            <p>LabSens • Raspberry Pi Zero 2W • 2026</p>
+        </div>
+    </div>
+
+    <script>
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+        }
+
+        function syncSettings() {
+            const data = {
+                time: document.getElementById('timeInput').value,
+                exposureTime: document.getElementById('exposureTime').value,
+                nightMode: document.getElementById('nightMode').checked
+            };
+            fetch('/settings', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => {
+                const consoleElement = document.getElementById('console');
+                if (data.message) {
+                    consoleElement.value += data.message + '\n';
+                    consoleElement.scrollTop = consoleElement.scrollHeight;
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+
+        function sendAction(button) {
+            fetch('/action', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ button: button })
+            })
+            .then(response => response.json())
+            .then(data => {
+                const consoleElement = document.getElementById('console');
+                if (data.message) {
+                    consoleElement.value += data.message + '\n';
+                    consoleElement.scrollTop = consoleElement.scrollHeight;
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+
+        function sendActionWithTime(button, time, exposureTime, nightMode) {
+            const data = { button, time, exposureTime, nightMode };
+            fetch('/action', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => {
+                const consoleElement = document.getElementById('console');
+                if (data.message) {
+                    consoleElement.value += data.message + '\n';
+                    consoleElement.scrollTop = consoleElement.scrollHeight;
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+
+        function receiveMessage() {
+            fetch('/send_message', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({})
+            })
+            .then(response => response.json())
+            .then(data => {
+                const consoleElement = document.getElementById('console');
+                if (data.message) {
+                    consoleElement.value += data.message + '\n';
+                    consoleElement.scrollTop = consoleElement.scrollHeight;
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+
+        setInterval(receiveMessage, 3000);
+    </script>
+</body>
+</html>

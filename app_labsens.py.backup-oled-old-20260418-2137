@@ -11,6 +11,9 @@ from typing import Optional
 
 import RPi.GPIO as GPIO
 from flask import Flask, jsonify, render_template, request, send_from_directory
+from luma.core.interface.serial import i2c
+from luma.oled.device import ssd1306
+from PIL import Image, ImageDraw, ImageFont
 
 app = Flask(__name__)
 
@@ -190,50 +193,136 @@ def safe_run(cmd: list[str], timeout: Optional[int] = None) -> subprocess.Comple
 
 
 # ==========================================================
-# OLED Manager (nuevo módulo modular)
+# Display OLED
 # ==========================================================
-from modules.oled_manager import OLEDManager
-
-# Creamos una sola instancia global del manager OLED
-oled_manager = OLEDManager()
-
-# ==========================================================
-# OLED Wrappers temporales (para compatibilidad con código viejo)
-# ==========================================================
-def update_display(force: bool = False) -> None:
-    """Wrapper temporal - llama al nuevo módulo"""
-    if force:
-        oled_manager.show_basic_screen()
-
-def shutdown_display() -> None:
-    """Wrapper temporal - limpia pantalla"""
-    if oled_manager.device:
-        try:
-            img = Image.new("1", (oled_manager.device.width, oled_manager.device.height), 0)
-            oled_manager.device.display(img)
-        except:
-            pass
-
-def draw_big_message(msg: str) -> None:
-    """Wrapper temporal - muestra mensaje grande"""
-    oled_manager.show_custom_message(msg)
-
-def draw_center_message(line1: str, line2: str = "", line3: str = "") -> None:
-    """Wrapper temporal"""
-    msg = f"{line1} {line2} {line3}".strip()
-    oled_manager.show_custom_message(msg)
-
 def init_display() -> tuple[bool, str]:
-    """Wrapper temporal - el OLED ya está inicializado por OLEDManager"""
-    global display_available, display_detected_on_boot
-    if oled_manager.device:
+    global serial_if, oled, display_available, display_detected_on_boot
+    try:
+        serial_if = i2c(port=DISPLAY_I2C_PORT, address=DISPLAY_I2C_ADDRESS)
+        oled = ssd1306(serial_if, width=DISPLAY_WIDTH, height=DISPLAY_HEIGHT, rotate=DISPLAY_ROTATE)
         display_available = True
         display_detected_on_boot = True
+        clear_display(force=True)
         return True, "Display OK"
-    else:
+    except Exception as exc:
         display_available = False
+        oled = None
         display_detected_on_boot = False
-        return False, "Display no detectado"
+        return False, f"Display no detectado: {exc}"
+
+
+def clear_display(force: bool = False) -> None:
+    if not display_available or oled is None:
+        return
+    if not force and not outputs_awake():
+        return
+    try:
+        image = Image.new("1", (oled.width, oled.height), 0)
+        oled.display(image)
+    except Exception:
+        pass
+
+
+def shutdown_display() -> None:
+    if not display_available or oled is None:
+        return
+    try:
+        image = Image.new("1", (oled.width, oled.height), 0)
+        oled.display(image)
+    except Exception:
+        pass
+
+
+def draw_center_message(line1: str, line2: str = "", line3: str = "") -> None:
+    if not display_available or oled is None:
+        return
+    try:
+        image = Image.new("1", (oled.width, oled.height), 0)
+        draw = ImageDraw.Draw(image)
+        font = get_font()
+        lines = [trim(line1, 20), trim(line2, 20), trim(line3, 20)]
+        y_positions = [8, 26, 44]
+        for y, txt in zip(y_positions, lines):
+            if txt:
+                draw.text((6, y), txt, fill=255, font=font)
+        oled.display(image)
+    except Exception:
+        pass
+
+
+def draw_big_message(msg: str) -> None:
+    if not display_available or oled is None:
+        return
+    try:
+        image = Image.new("1", (oled.width, oled.height), 0)
+        draw = ImageDraw.Draw(image)
+        font = get_big_font()
+
+        raw = str(msg).strip()
+        if " " in raw:
+            words = raw.split()
+            mid = max(1, len(words) // 2)
+            lines = [" ".join(words[:mid]), " ".join(words[mid:])]
+        elif len(raw) > 10:
+            mid = len(raw) // 2
+            lines = [raw[:mid], raw[mid:]]
+        else:
+            lines = [raw]
+
+        lines = [trim(line, 12) for line in lines if line]
+
+        if len(lines) == 1:
+            y_positions = [20]
+        else:
+            y_positions = [10, 34]
+
+        for y, line in zip(y_positions, lines[:2]):
+            if hasattr(draw, "textbbox") and font is not None:
+                bbox = draw.textbbox((0, 0), line, font=font)
+                text_w = bbox[2] - bbox[0]
+                text_h = bbox[3] - bbox[1]
+            else:
+                text_w = len(line) * 12
+                text_h = 16
+
+            x = max(0, (oled.width - text_w) // 2)
+            draw.text((x, y), line, fill=255, font=font)
+
+        oled.display(image)
+    except Exception:
+        pass
+
+
+def update_display(force: bool = False) -> None:
+    if not display_available or oled is None:
+        return
+
+    if not force and not outputs_awake():
+        shutdown_display()
+        return
+
+    try:
+        image = Image.new("1", (oled.width, oled.height), 0)
+        draw = ImageDraw.Draw(image)
+        font = get_font()
+
+        if network_mode == "WIFI" and ssid not in ("", "-"):
+            net_label = f"SSID:{ssid}"
+        elif network_mode == "AP":
+            net_label = f"NET:{ssid}" if ssid not in ("", "-") else "NET:AP"
+        else:
+            net_label = f"NET:{network_mode}"
+        ip_label = f"IP:{ip_addr}"
+        mode_label = f"MODO:{current_mode_label()}"
+        msg_label = effective_status_line()
+
+        draw.text((0, 0), trim(net_label, 21), fill=255, font=font)
+        draw.text((0, 16), trim(ip_label, 21), fill=255, font=font)
+        draw.text((0, 32), trim(mode_label, 21), fill=255, font=font)
+        draw.text((0, 48), msg_label, fill=255, font=font)
+        oled.display(image)
+    except Exception:
+        pass
 
 
 # ==========================================================
