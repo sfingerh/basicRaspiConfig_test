@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "minor_version": 1,
+  "key": "person",
+  "data": {
+    "items": [
+      {
+        "id": "sfingerh",
+        "name": "sfingerh",
+        "user_id": "f48af3cd265345168593e3efcb25dfda",
+        "device_trackers": [
+          "device_tracker.sfi_ip13"
+        ]
+      }
+    ]
+  }
+}

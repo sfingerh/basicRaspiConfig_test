@@ -1,0 +1,38 @@
+2026-04-21 00:54:33.140 WARNING (Recorder) [homeassistant.components.recorder.util] The system could not validate that the sqlite3 database at //config/home-assistant_v2.db was shutdown cleanly
+2026-04-21 00:54:33.612 WARNING (Recorder) [homeassistant.components.recorder.util] Ended unfinished session (id=2 from 2026-04-21 03:15:15.454550)
+2026-04-21 00:54:37.311 ERROR (MainThread) [habluetooth.manager] Missing required permissions for Bluetooth management: Missing NET_ADMIN/NET_RAW capabilities for Bluetooth management. Automatic adapter recovery is unavailable. Add NET_ADMIN and NET_RAW capabilities to the container to enable it
+2026-04-21 00:54:37.484 ERROR (MainThread) [habluetooth.scanner] hci0 (B8:27:EB:68:27:03): Failed to force stop scanner: 'NoneType' object has no attribute 'send'
+2026-04-21 00:55:16.294 ERROR (MainThread) [habluetooth.scanner] hci0 (B8:27:EB:68:27:03): Failed to force stop scanner: 'NoneType' object has no attribute 'send'
+2026-04-21 00:55:16.524 ERROR (MainThread) [habluetooth.scanner] hci0 (B8:27:EB:68:27:03): Failed to force stop scanner: 'NoneType' object has no attribute 'send'
+2026-04-21 00:55:24.669 ERROR (MainThread) [habluetooth.scanner] hci0 (B8:27:EB:68:27:03): Failed to force stop scanner: 'NoneType' object has no attribute 'send'
+2026-04-21 00:55:26.652 ERROR (MainThread) [habluetooth.scanner] hci0 (B8:27:EB:68:27:03): Failed to force stop scanner: 'NoneType' object has no attribute 'send'
+2026-04-21 00:55:45.291 ERROR (MainThread) [habluetooth.scanner] hci0 (B8:27:EB:68:27:03): Failed to force stop scanner: 'NoneType' object has no attribute 'send'
+2026-04-21 00:56:07.141 ERROR (MainThread) [habluetooth.scanner] hci0 (B8:27:EB:68:27:03): Failed to force stop scanner: 'NoneType' object has no attribute 'send'
+2026-04-21 00:56:31.733 ERROR (MainThread) [homeassistant.components.websocket_api.http.connection] [547691209056] from 192.168.0.174 (Home Assistant/2026.4.0 (io.robbie.HomeAssistant; build:2026.1862; iOS 26.3.1)): Unexpected error inside websocket API
+Traceback (most recent call last):
+  File "/usr/src/homeassistant/homeassistant/components/websocket_api/http.py", line 352, in async_handle
+    connection = await self._async_handle_auth_phase(auth, send_bytes_text)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/src/homeassistant/homeassistant/components/websocket_api/http.py", line 397, in _async_handle_auth_phase
+    await send_bytes_text(AUTH_REQUIRED_MESSAGE)
+  File "/usr/local/lib/python3.14/site-packages/aiohttp/_websocket/writer.py", line 90, in send_frame
+    self._send_compressed_frame_sync(message, opcode, compress)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.14/site-packages/aiohttp/_websocket/writer.py", line 206, in _send_compressed_frame_sync
+    self._write_websocket_frame(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        (
+        ^
+    ...<8 lines>...
+        0x40,
+        ^^^^^
+    )
+    ^
+  File "/usr/local/lib/python3.14/site-packages/aiohttp/_websocket/writer.py", line 151, in _write_websocket_frame
+    raise ClientConnectionResetError("Cannot write to closing transport")
+aiohttp.client_exceptions.ClientConnectionResetError: Cannot write to closing transport
+2026-04-21 00:57:05.868 ERROR (MainThread) [habluetooth.scanner] hci0 (B8:27:EB:68:27:03): Failed to force stop scanner: 'NoneType' object has no attribute 'send'
+2026-04-21 00:57:27.675 ERROR (MainThread) [habluetooth.scanner] hci0 (B8:27:EB:68:27:03): Failed to force stop scanner: 'NoneType' object has no attribute 'send'
+2026-04-21 00:58:26.399 ERROR (MainThread) [habluetooth.scanner] hci0 (B8:27:EB:68:27:03): Failed to force stop scanner: 'NoneType' object has no attribute 'send'
+2026-04-21 00:58:47.820 ERROR (MainThread) [habluetooth.scanner] hci0 (B8:27:EB:68:27:03): Failed to force stop scanner: 'NoneType' object has no attribute 'send'
+2026-04-21 00:59:46.952 ERROR (MainThread) [habluetooth.scanner] hci0 (B8:27:EB:68:27:03): Failed to force stop scanner: 'NoneType' object has no attribute 'send'

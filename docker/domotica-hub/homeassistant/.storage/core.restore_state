@@ -1,0 +1,139 @@
+{
+  "version": 1,
+  "minor_version": 1,
+  "key": "core.restore_state",
+  "data": [
+    {
+      "state": {"entity_id":"conversation.home_assistant","state":"unknown","attributes":{"friendly_name":"Home Assistant","supported_features":1},"last_changed":"2026-04-21T03:54:36.078001+00:00","last_reported":"2026-04-21T03:54:36.078001+00:00","last_updated":"2026-04-21T03:54:36.078001+00:00","context":{"id":"01KPQ2SY5E8ZFP6V905WYEE9WB","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2026-04-21T03:55:16.063461+00:00"
+    },
+    {
+      "state": {"entity_id":"event.backup_automatic_backup","state":"unknown","attributes":{"event_types":["completed","failed","in_progress"],"event_type":null,"friendly_name":"Backup Automatic backup"},"last_changed":"2026-04-21T03:54:36.890921+00:00","last_reported":"2026-04-21T03:54:36.890921+00:00","last_updated":"2026-04-21T03:54:36.890921+00:00","context":{"id":"01KPQ2SYYT9NHF05CRQH96PR7Z","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "last_event_type": null,
+        "last_event_attributes": null
+      },
+      "last_seen": "2026-04-21T03:55:16.063461+00:00"
+    },
+    {
+      "state": {"entity_id":"person.sfingerh","state":"home","attributes":{"editable":true,"id":"sfingerh","device_trackers":["device_tracker.sfi_ip13"],"latitude":-33.03441515079606,"longitude":-71.52972823728913,"gps_accuracy":10,"source":"person.sfingerh","user_id":"f48af3cd265345168593e3efcb25dfda","friendly_name":"sfingerh"},"last_changed":"2026-04-21T03:54:43.211179+00:00","last_reported":"2026-04-21T03:54:43.211179+00:00","last_updated":"2026-04-21T03:54:43.211179+00:00","context":{"id":"01KPQ2T54BE9GM1YMNB8A9QS06","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2026-04-21T03:55:16.063461+00:00"
+    },
+    {
+      "state": {"entity_id":"device_tracker.sfi_ip13","state":"home","attributes":{"source_type":"gps","battery_level":25,"latitude":-33.03441515079606,"longitude":-71.52972823728913,"gps_accuracy":10,"altitude":12.09914775145475,"vertical_accuracy":30,"friendly_name":"sfi IP13"},"last_changed":"2026-04-21T03:55:11.738861+00:00","last_reported":"2026-04-21T03:55:11.738861+00:00","last_updated":"2026-04-21T03:55:11.738861+00:00","context":{"id":"01KPQ2V0ZTQWK8VBPMWWS2Q3QR","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2026-04-21T03:55:16.063461+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.sfi_ip13_battery_level","state":"25","attributes":{"unit_of_measurement":"%","device_class":"battery","icon":"mdi:battery-20","friendly_name":"sfi IP13 Battery Level"},"last_changed":"2026-04-21T03:55:11.755832+00:00","last_reported":"2026-04-21T03:55:11.755832+00:00","last_updated":"2026-04-21T03:55:11.755832+00:00","context":{"id":"01KPQ2V10B813PRVQP2FBHD51W","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": 25,
+        "native_unit_of_measurement": "%"
+      },
+      "last_seen": "2026-04-21T03:55:16.063461+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.sfi_ip13_sim_1","state":"unavailable","attributes":{"icon":"mdi:dots-square","friendly_name":"sfi IP13 SIM 1"},"last_changed":"2026-04-21T03:55:11.757797+00:00","last_reported":"2026-04-21T03:55:11.757797+00:00","last_updated":"2026-04-21T03:55:11.757797+00:00","context":{"id":"01KPQ2V10DR8PT5KFX7RK8W7MS","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": "unavailable",
+        "native_unit_of_measurement": null
+      },
+      "last_seen": "2026-04-21T03:55:16.063461+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.sfi_ip13_sim_2","state":"unavailable","attributes":{"icon":"mdi:dots-square","friendly_name":"sfi IP13 SIM 2"},"last_changed":"2026-04-21T03:55:11.759589+00:00","last_reported":"2026-04-21T03:55:11.759589+00:00","last_updated":"2026-04-21T03:55:11.759589+00:00","context":{"id":"01KPQ2V10FFCCC4FACY2WDE1V2","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": "unavailable",
+        "native_unit_of_measurement": null
+      },
+      "last_seen": "2026-04-21T03:55:16.063461+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.sfi_ip13_geocoded_location","state":"unavailable","attributes":{"icon":"mdi:dots-square","friendly_name":"sfi IP13 Geocoded Location"},"last_changed":"2026-04-21T03:55:11.761315+00:00","last_reported":"2026-04-21T03:55:11.761315+00:00","last_updated":"2026-04-21T03:55:11.761315+00:00","context":{"id":"01KPQ2V10HVB3SHVAM7F5YEJ4K","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": "unavailable",
+        "native_unit_of_measurement": null
+      },
+      "last_seen": "2026-04-21T03:55:16.063461+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.sfi_ip13_last_update_trigger","state":"unavailable","attributes":{"icon":"mdi:dots-square","friendly_name":"sfi IP13 Last Update Trigger"},"last_changed":"2026-04-21T03:55:11.763255+00:00","last_reported":"2026-04-21T03:55:11.763255+00:00","last_updated":"2026-04-21T03:55:11.763255+00:00","context":{"id":"01KPQ2V10KN1Y5H92KCKVY07SQ","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": "unavailable",
+        "native_unit_of_measurement": null
+      },
+      "last_seen": "2026-04-21T03:55:16.063461+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.sfi_ip13_app_version","state":"2026.4.0","attributes":{"icon":"mdi:cellphone","friendly_name":"sfi IP13 App Version"},"last_changed":"2026-04-21T03:55:11.767378+00:00","last_reported":"2026-04-21T03:55:11.767378+00:00","last_updated":"2026-04-21T03:55:11.767378+00:00","context":{"id":"01KPQ2V10Q58JQSDT9DQW424WD","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": "2026.4.0",
+        "native_unit_of_measurement": null
+      },
+      "last_seen": "2026-04-21T03:55:16.063461+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.sfi_ip13_location_permission","state":"Authorized Always","attributes":{"icon":"mdi:map","friendly_name":"sfi IP13 Location permission"},"last_changed":"2026-04-21T03:55:11.769143+00:00","last_reported":"2026-04-21T03:55:11.769143+00:00","last_updated":"2026-04-21T03:55:11.769143+00:00","context":{"id":"01KPQ2V10SH3MSS64ZJX56RF06","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": "Authorized Always",
+        "native_unit_of_measurement": null
+      },
+      "last_seen": "2026-04-21T03:55:16.063461+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.sfi_ip13_bssid","state":"unavailable","attributes":{"icon":"mdi:dots-square","friendly_name":"sfi IP13 BSSID"},"last_changed":"2026-04-21T03:55:11.770657+00:00","last_reported":"2026-04-21T03:55:11.770657+00:00","last_updated":"2026-04-21T03:55:11.770657+00:00","context":{"id":"01KPQ2V10TANVMKYXH2TBSS5X5","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": "unavailable",
+        "native_unit_of_measurement": null
+      },
+      "last_seen": "2026-04-21T03:55:16.063461+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.sfi_ip13_audio_output","state":"unavailable","attributes":{"icon":"mdi:dots-square","friendly_name":"sfi IP13 Audio Output"},"last_changed":"2026-04-21T03:55:11.772418+00:00","last_reported":"2026-04-21T03:55:11.772418+00:00","last_updated":"2026-04-21T03:55:11.772418+00:00","context":{"id":"01KPQ2V10WAHP91FTFQ7V1Z3J2","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": "unavailable",
+        "native_unit_of_measurement": null
+      },
+      "last_seen": "2026-04-21T03:55:16.063461+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.sfi_ip13_battery_state","state":"Not Charging","attributes":{"Low Power Mode":false,"icon":"mdi:battery-20","friendly_name":"sfi IP13 Battery State"},"last_changed":"2026-04-21T03:55:11.774192+00:00","last_reported":"2026-04-21T03:55:11.774192+00:00","last_updated":"2026-04-21T03:55:11.774192+00:00","context":{"id":"01KPQ2V10Y36Z7BDTK9ZTJ5SED","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": "Not Charging",
+        "native_unit_of_measurement": null
+      },
+      "last_seen": "2026-04-21T03:55:16.063461+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.sfi_ip13_storage","state":"unavailable","attributes":{"unit_of_measurement":"% available","icon":"mdi:dots-square","friendly_name":"sfi IP13 Storage"},"last_changed":"2026-04-21T03:55:11.775996+00:00","last_reported":"2026-04-21T03:55:11.775996+00:00","last_updated":"2026-04-21T03:55:11.775996+00:00","context":{"id":"01KPQ2V10ZT96YWD9FYM02SNZ6","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": "unavailable",
+        "native_unit_of_measurement": "% available"
+      },
+      "last_seen": "2026-04-21T03:55:16.063461+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.sfi_ip13_ssid","state":"unavailable","attributes":{"icon":"mdi:dots-square","friendly_name":"sfi IP13 SSID"},"last_changed":"2026-04-21T03:55:11.778097+00:00","last_reported":"2026-04-21T03:55:11.778097+00:00","last_updated":"2026-04-21T03:55:11.778097+00:00","context":{"id":"01KPQ2V112D6097HN22B20T9RY","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": "unavailable",
+        "native_unit_of_measurement": null
+      },
+      "last_seen": "2026-04-21T03:55:16.063461+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.sfi_ip13_connection_type","state":"unavailable","attributes":{"icon":"mdi:dots-square","friendly_name":"sfi IP13 Connection Type"},"last_changed":"2026-04-21T03:55:11.779794+00:00","last_reported":"2026-04-21T03:55:11.779794+00:00","last_updated":"2026-04-21T03:55:11.779794+00:00","context":{"id":"01KPQ2V113S0NXSJ552ZZ0JDV5","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": "unavailable",
+        "native_unit_of_measurement": null
+      },
+      "last_seen": "2026-04-21T03:55:16.063461+00:00"
+    },
+    {
+      "state": {"entity_id":"tts.google_translate_en_com","state":"unknown","attributes":{"friendly_name":"Google Translate en com"},"last_changed":"2026-04-21T03:55:12.912657+00:00","last_reported":"2026-04-21T03:55:12.912657+00:00","last_updated":"2026-04-21T03:55:12.912657+00:00","context":{"id":"01KPQ2V24G4XC0QFBZPAP5H3D5","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2026-04-21T03:55:16.063461+00:00"
+    }
+  ]
+}
